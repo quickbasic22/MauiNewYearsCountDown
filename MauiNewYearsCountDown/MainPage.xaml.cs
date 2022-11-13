@@ -1,14 +1,12 @@
 ﻿using Microsoft.Maui.Controls.PlatformConfiguration.TizenSpecific;
+using Microsoft.Maui.Dispatching;
 using System.Collections.ObjectModel;
 
 namespace MauiNewYearsCountDown;
 
 public partial class MainPage : ContentPage
 {
-    public ObservableCollection<int> Days { get; set; }
-    public ObservableCollection<int> Hours { get; set; }
-    public ObservableCollection<int> Minutes { get; set; }
-    public ObservableCollection<int> Seconds { get; set; }
+    
     private DateTime CurrentTime;
     private DateTime Midnight;
     private TimeSpan CountDown;
@@ -21,25 +19,45 @@ public partial class MainPage : ContentPage
         CurrentTime = DateTime.Now;
         Midnight = new DateTime(2023, 1, 1, 0, 0, 0, DateTimeKind.Local);
         int dayOfYear = DateTime.Now.DayOfYear;
-        Device.StartTimer(TimeSpan.FromSeconds(1.0), MyTimerCallBack);
-        LabelDays.Dispatcher.StartTimer(TimeSpan.FromSeconds(1), MyTimerCallBack);
-        LabelHours.Dispatcher.StartTimer(TimeSpan.FromSeconds(1), MyTimerCallBack);
-        LabelMinutes.Dispatcher.StartTimer(TimeSpan.FromSeconds(1), MyTimerCallBack);
-        LabelSeconds.Dispatcher.StartTimer(TimeSpan.FromSeconds(1), MyTimerCallBack);
-
+       
+        LabelDays.Dispatcher.StartTimer(TimeSpan.FromSeconds(1), MyTimerCallBackDays);
+        LabelHours.Dispatcher.StartTimer(TimeSpan.FromSeconds(1), MyTimerCallBackHours);
+        LabelMinutes.Dispatcher.StartTimer(TimeSpan.FromSeconds(1), MyTimerCallBackMinutes);
+        LabelSeconds.Dispatcher.StartTimer(TimeSpan.FromSeconds(1), MyTimerCallBackSeconds);
+        LabelTotalHours.Dispatcher.StartTimer(TimeSpan.FromSeconds(1), MyTimerCallBackTotalHours);
     }
 
-    bool MyTimerCallBack()
+    private bool MyTimerCallBackTotalHours()
     {
-        tc = new TimerCallback(CheckTime);
-        t = new System.Threading.Timer(tc, null, 1000, 1000);
+        var CurrentTotalHours = Midnight - DateTime.Now;
+        LabelTotalHours.Dispatcher.Dispatch(() => { LabelTotalHours.Text = String.Format("{0:N0} Hours to go.", CurrentTotalHours.TotalHours); });
         return true;
     }
-    
-    private void CheckTime(object state)
+
+    bool MyTimerCallBackDays()
     {
-        CurrentTime = DateTime.Now;
-        CountDown = Midnight - CurrentTime;  
+        var CurrentDays = Midnight - DateTime.Now;
+        LabelDays.Dispatcher.Dispatch(() => { LabelDays.Text = String.Format("{0:N0}", CurrentDays.TotalDays); });
+        return true;
     }
+    bool MyTimerCallBackHours()
+    {
+        var CurrentHours = Midnight - DateTime.Now;
+        LabelHours.Dispatcher.Dispatch(() => { LabelHours.Text = String.Format("{0:N0}", CurrentHours.Hours); });
+        return true;
+    }
+    bool MyTimerCallBackMinutes()
+    {
+        var CurrentMinutes = Midnight - DateTime.Now;
+        LabelMinutes.Dispatcher.Dispatch(() => { LabelMinutes.Text = String.Format("{0:N0}", CurrentMinutes.Minutes); });
+        return true;
+    }
+    bool MyTimerCallBackSeconds()
+    {
+        var CurrentSeconds = Midnight - DateTime.Now;
+        LabelSeconds.Dispatcher.Dispatch(() => { LabelSeconds.Text = String.Format("{0:N0}", CurrentSeconds.Seconds); });
+        return true;
+    }
+
 }
 

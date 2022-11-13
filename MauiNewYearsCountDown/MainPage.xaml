@@ -34,7 +34,7 @@
                 <Label x:Name="LabelMinutes" Grid.Column="2" Grid.Row="1" Text="43" FontSize="30" />
                 <Label x:Name="LabelSeconds" Grid.Column="3" Grid.Row="1" Text="27" FontSize="30" />
                 <BoxView Grid.ColumnSpan="4" Grid.Row="3"  HeightRequest="100" Color="BlueViolet" />
-                <Label Grid.Column="2" Grid.Row="5" Text="Hour left to go 1200" FontSize="30" />
+                <Label x:Name="LabelTotalHours" Grid.Column="2" Grid.Row="5" Text="Hour left to go 1200" FontSize="30" />
             </Grid>
 
 
