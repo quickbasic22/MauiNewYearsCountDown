@@ -1,63 +1,36 @@
-﻿using Microsoft.Maui.Controls.PlatformConfiguration.TizenSpecific;
-using Microsoft.Maui.Dispatching;
+﻿using Microsoft.Maui.Dispatching;
 using System.Collections.ObjectModel;
 
 namespace MauiNewYearsCountDown;
 
 public partial class MainPage : ContentPage
-{
-    
+{   
     private DateTime CurrentTime;
     private DateTime Midnight;
-    private TimeSpan CountDown;
-    TimerCallback tc;
-    private System.Threading.Timer t;
-
+    private double dayOfYear = 0;
     public MainPage()
     {
         InitializeComponent();
         CurrentTime = DateTime.Now;
         Midnight = new DateTime(2023, 1, 1, 0, 0, 0, DateTimeKind.Local);
-        int dayOfYear = DateTime.Now.DayOfYear;
-       
-        LabelDays.Dispatcher.StartTimer(TimeSpan.FromSeconds(1), MyTimerCallBackDays);
-        LabelHours.Dispatcher.StartTimer(TimeSpan.FromSeconds(1), MyTimerCallBackHours);
-        LabelMinutes.Dispatcher.StartTimer(TimeSpan.FromSeconds(1), MyTimerCallBackMinutes);
-        LabelSeconds.Dispatcher.StartTimer(TimeSpan.FromSeconds(1), MyTimerCallBackSeconds);
-        LabelTotalHours.Dispatcher.StartTimer(TimeSpan.FromSeconds(1), MyTimerCallBackTotalHours);
+        dayOfYear = Double.Parse(DateTime.Now.DayOfYear.ToString());    
+        LabelTotalHours.Dispatcher.StartTimer(TimeSpan.FromSeconds(1), MyTimerCallBack);
     }
 
-    private bool MyTimerCallBackTotalHours()
+    private bool MyTimerCallBack()
     {
-        var CurrentTotalHours = Midnight - DateTime.Now;
-        LabelTotalHours.Dispatcher.Dispatch(() => { LabelTotalHours.Text = String.Format("{0:N0} Hours to go.", CurrentTotalHours.TotalHours); });
+        var CurrentDateTimeDifference = Midnight - DateTime.Now;
+        double PercentLeft = dayOfYear / 365.0;
+        YearProgressBar.Progress = PercentLeft;
+        LabelTotalHours.Dispatcher.Dispatch(() => 
+        {
+            LabelTotalHours.Text = String.Format("{0:N0} Hours to go.", CurrentDateTimeDifference.TotalHours);
+            LabelDays.Text = String.Format("{0:N0}", CurrentDateTimeDifference.TotalDays);
+            LabelHours.Text = String.Format("{0:N0}", CurrentDateTimeDifference.Hours);
+            LabelMinutes.Text = String.Format("{0:N0}", CurrentDateTimeDifference.Minutes);
+            LabelSeconds.Text = String.Format("{0:N0}", CurrentDateTimeDifference.Seconds);
+        });
         return true;
     }
-
-    bool MyTimerCallBackDays()
-    {
-        var CurrentDays = Midnight - DateTime.Now;
-        LabelDays.Dispatcher.Dispatch(() => { LabelDays.Text = String.Format("{0:N0}", CurrentDays.TotalDays); });
-        return true;
-    }
-    bool MyTimerCallBackHours()
-    {
-        var CurrentHours = Midnight - DateTime.Now;
-        LabelHours.Dispatcher.Dispatch(() => { LabelHours.Text = String.Format("{0:N0}", CurrentHours.Hours); });
-        return true;
-    }
-    bool MyTimerCallBackMinutes()
-    {
-        var CurrentMinutes = Midnight - DateTime.Now;
-        LabelMinutes.Dispatcher.Dispatch(() => { LabelMinutes.Text = String.Format("{0:N0}", CurrentMinutes.Minutes); });
-        return true;
-    }
-    bool MyTimerCallBackSeconds()
-    {
-        var CurrentSeconds = Midnight - DateTime.Now;
-        LabelSeconds.Dispatcher.Dispatch(() => { LabelSeconds.Text = String.Format("{0:N0}", CurrentSeconds.Seconds); });
-        return true;
-    }
-
 }
 
