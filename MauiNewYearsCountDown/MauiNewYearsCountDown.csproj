@@ -49,6 +49,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiAsset Remove="Resources\Raw\testPage.html" />
+	</ItemGroup>
+
+	<ItemGroup>
 	  <MauiXaml Update="Controls\MyCustomProgressBar.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

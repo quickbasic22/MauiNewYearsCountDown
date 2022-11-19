@@ -9,10 +9,4 @@ public partial class App : Application
 		InitializeComponent();
 		MainPage = new AppShell();
 	}
-
-    protected override Window CreateWindow(IActivationState activationState)
-	{ 
-		
-        return base.CreateWindow(activationState);
-    }
 }

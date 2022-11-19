@@ -7,8 +7,9 @@
 
     
         <StackLayout Margin="0" Padding="0">
-            <Label Text="New Years 2023" FontSize="60" TextColor="DarkViolet" HorizontalOptions="Center" VerticalOptions="Center" />
-            <ProgressBar x:Name="YearProgressBar" BackgroundColor="Blue" />
+            <Label Text="New Years" FontSize="70" TextColor="DarkViolet" HorizontalOptions="Center" />
+        <Label Text="2023" FontSize="70" TextColor="DarkViolet" HorizontalOptions="Center" />
+        <ProgressBar x:Name="YearProgressBar" BackgroundColor="Blue" />
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
@@ -19,21 +20,23 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto" />
                     <RowDefinition Height="auto" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
                     <RowDefinition Height="auto" />
-                </Grid.RowDefinitions>
-                <Label Grid.Column="0" Grid.Row="0" Text="Days" FontSize="19" />
-                <Label Grid.Column="1" Grid.Row="0" Text="Hours" FontSize="19" />
-                <Label Grid.Column="2" Grid.Row="0" Text="Minutes" FontSize="19" />
-                <Label Grid.Column="3" Grid.Row="0" Text="Seconds" FontSize="19" />
-                <Label x:Name="LabelDays" Grid.Column="0" Grid.Row="1" Text="48" FontSize="25" />
-                <Label x:Name="LabelHours" Grid.Column="1" Grid.Row="1" Text="06" FontSize="25" />
-                <Label x:Name="LabelMinutes" Grid.Column="2" Grid.Row="1" Text="43" FontSize="25" />
-                <Label x:Name="LabelSeconds" Grid.Column="3" Grid.Row="1" Text="27" FontSize="25" />
-                <BoxView Grid.ColumnSpan="4" Grid.Row="3" MinimumHeightRequest="10" MaximumHeightRequest="20" Color="BlueViolet" />
-                <Label x:Name="LabelTotalHours" Grid.Column="0" Grid.Row="5" Text="" FontSize="20" />
-            <BoxView Grid.ColumnSpan="4" Grid.Row="3" MinimumHeightRequest="10" MaximumHeightRequest="20" Color="BlueViolet" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
+                <Label Grid.Column="0" Grid.Row="0" Text="Days" FontSize="20" />
+                <Label Grid.Column="1" Grid.Row="0" Text="Hours" FontSize="20" />
+                <Label Grid.Column="2" Grid.Row="0" Text="Minutes" FontSize="20" />
+                <Label Grid.Column="3" Grid.Row="0" Text="Seconds" FontSize="20" />
+                <Label x:Name="LabelDays" Grid.Column="0" Grid.Row="1" Text="48" FontSize="50" />
+                <Label x:Name="LabelHours" Grid.Column="1" Grid.Row="1" Text="06" FontSize="50" />
+                <Label x:Name="LabelMinutes" Grid.Column="2" Grid.Row="1" Text="43" FontSize="50" />
+                <Label x:Name="LabelSeconds" Grid.Column="3" Grid.Row="1" Text="27" FontSize="50" />
+                <BoxView Grid.ColumnSpan="4" Grid.Row="2" MinimumHeightRequest="10" MaximumHeightRequest="20" Color="BlueViolet" />
+                <Label x:Name="LabelTotalHours" Grid.ColumnSpan="4" Grid.Row="3" Text="" FontSize="40" LineBreakMode="NoWrap" />
+            <Label Grid.ColumnSpan="4" Grid.Row="4" Text="" FontSize="40" />
+            <BoxView Grid.ColumnSpan="4" Grid.Row="5" MinimumHeightRequest="10" MaximumHeightRequest="20" Color="BlueViolet" />
         </Grid>
         </StackLayout>
     
