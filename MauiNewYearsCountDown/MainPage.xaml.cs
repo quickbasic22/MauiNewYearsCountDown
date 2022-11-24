@@ -25,7 +25,7 @@ public partial class MainPage : ContentPage
         LabelTotalHours.Dispatcher.Dispatch(() => 
         {
             LabelTotalHours.Text = String.Format("{0:N0} Hours to go.", CurrentDateTimeDifference.TotalHours);
-            LabelDays.Text = String.Format("{0:N0}", CurrentDateTimeDifference.TotalDays);
+            LabelDays.Text = String.Format("{0:N0}", CurrentDateTimeDifference.Days);
             LabelHours.Text = String.Format("{0:N0}", CurrentDateTimeDifference.Hours);
             LabelMinutes.Text = String.Format("{0:N0}", CurrentDateTimeDifference.Minutes);
             LabelSeconds.Text = String.Format("{0:N0}", CurrentDateTimeDifference.Seconds);
